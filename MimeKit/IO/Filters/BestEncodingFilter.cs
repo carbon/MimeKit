@@ -27,6 +27,8 @@
 using System;
 using System.Buffers.Binary;
 
+using MimeKit.Utils;
+
 namespace MimeKit.IO.Filters {
 	/// <summary>
 	/// A filter that can be used to determine the most efficient Content-Transfer-Encoding.
@@ -125,19 +127,6 @@ namespace MimeKit.IO.Filters {
 
 		#region IMimeFilter implementation
 
-		static bool IsMboxMarker (ReadOnlySpan<byte> marker)
-		{
-			const uint FromMask = 0xFFFFFFFF;
-			const uint From     = 0x6D6F7246;
-
-			uint word = BinaryPrimitives.ReadUInt32LittleEndian (marker);
-
-			if ((word & FromMask) != From)
-				return false;
-
-			return marker[4] == (byte) ' ';
-		}
-
 		unsafe void Scan (byte* inptr, byte* inend)
 		{
 			while (inptr < inend) {
@@ -164,7 +153,7 @@ namespace MimeKit.IO.Filters {
 					linelen = 0;
 
 					// check our from-save buffer for "From "
-					if (!hasMarker && markerLength == 5 && IsMboxMarker (marker))
+					if (!hasMarker && markerLength == 5 && MboxUtils.IsMarker (marker))
 						hasMarker = true;
 
 					markerLength = 0;

@@ -1189,20 +1189,12 @@ namespace MimeKit {
 
 		static unsafe bool IsMboxMarker (byte* text, bool allowMunged = false)
 		{
-#if COMPARE_QWORD
-			const ulong FromMask = 0x000000FFFFFFFFFF;
-			const ulong From     = 0x000000206D6F7246;
-			ulong* qword = (ulong*) text;
-
-			return (*qword & FromMask) == From;
-#else
 			byte* inptr = text;
 
 			if (allowMunged && *inptr == (byte) '>')
 				inptr++;
 
-			return *inptr++ == (byte) 'F' && *inptr++ == (byte) 'r' && *inptr++ == (byte) 'o' && *inptr++ == (byte) 'm' && *inptr == (byte) ' ';
-#endif
+			return MboxUtils.IsMarker (new ReadOnlySpan<byte> (text, 5));
 		}
 
 		static unsafe bool IsMboxMarker (byte[] text, bool allowMunged = false)
