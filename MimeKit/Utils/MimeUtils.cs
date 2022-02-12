@@ -474,6 +474,9 @@ namespace MimeKit.Utils {
 			return quoted.ToString ();
 		}
 
+
+		private static readonly char[] unquotableChars = { '\r', '\n', '\t', '\\', '"' };
+
 		/// <summary>
 		/// Unquote the specified text.
 		/// </summary>
@@ -490,7 +493,7 @@ namespace MimeKit.Utils {
 			if (text == null)
 				throw new ArgumentNullException (nameof (text));
 
-			int index = text.IndexOfAny (new [] { '\r', '\n', '\t', '\\', '"' });
+			int index = text.IndexOfAny (unquotableChars);
 
 			if (index == -1)
 				return text;
