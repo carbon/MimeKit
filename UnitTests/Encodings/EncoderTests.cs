@@ -676,7 +676,7 @@ namespace UnitTests.Encodings {
 
 		static void AssertArgumentExceptions (IMimeEncoder encoder)
 		{
-			var output = new byte[0];
+			var output = Array.Empty<byte> ();
 
 			Assert.Throws<ArgumentNullException> (() => encoder.Encode (null, 0, 0, output));
 			Assert.Throws<ArgumentOutOfRangeException> (() => encoder.Encode (new byte[0], -1, 0, output));
@@ -693,7 +693,7 @@ namespace UnitTests.Encodings {
 
 		static void AssertArgumentExceptions (IMimeDecoder decoder)
 		{
-			var output = new byte[0];
+			var output = Array.Empty<byte> ();
 
 			Assert.Throws<ArgumentNullException> (() => decoder.Decode (null, 0, 0, output));
 			Assert.Throws<ArgumentOutOfRangeException> (() => decoder.Decode (new byte[0], -1, 0, output));

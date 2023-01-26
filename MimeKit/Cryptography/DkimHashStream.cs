@@ -97,7 +97,7 @@ namespace MimeKit.Cryptography {
 		public byte[] GenerateHash ()
 		{
 #if ENABLE_NATIVE_DKIM
-			digest.TransformFinalBlock (new byte[0], 0, 0);
+			digest.TransformFinalBlock (Array.Empty<byte> (), 0, 0);
 
 			return digest.Hash;
 #else

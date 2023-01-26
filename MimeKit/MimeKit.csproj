@@ -5,13 +5,13 @@
     <AssemblyTitle>MimeKit</AssemblyTitle>
     <VersionPrefix>3.1.1</VersionPrefix>
     <Authors>Jeffrey Stedfast</Authors>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net452;net46;net47;net48;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net462;net6.0</TargetFrameworks>
     <LangVersion>10</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <AssemblyName>MimeKit</AssemblyName>
     <PackageId>MimeKit</PackageId>
-    <PackageTags>mime;encryption;dkim;security;smime;s/mime;openpgp;pgp;mbox;email;parser;tnef;net46;net47;net48;net5.0;net6.0;netstandard;netstandard2.0;netstandard2.1</PackageTags>
+    <PackageTags>mime;encryption;dkim;security;smime;s/mime;openpgp;pgp;mbox;email;parser;tnef;net462;net6.0;netstandard;netstandard2.0;netstandard2.1</PackageTags>
     <PackageProjectUrl>https://github.com/jstedfast/MimeKit</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/jstedfast/MimeKit/blob/master/License.md</PackageLicenseUrl>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
@@ -48,7 +48,7 @@
     <DefineConstants>$(DefineConstants);ENABLE_SNM</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" $(TargetFramework.StartsWith('net4')) Or $(TargetFramework.StartsWith('net5')) Or $(TargetFramework.StartsWith('net6')) ">
+  <PropertyGroup Condition=" $(TargetFramework.StartsWith('net4')) Or $(TargetFramework.StartsWith('net6')) ">
     <DefineConstants>$(DefineConstants);ENABLE_SNM;SERIALIZABLE</DefineConstants>
   </PropertyGroup>
 
@@ -74,10 +74,6 @@
   <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
     <PackageReference Include="System.Buffers" Version="4.5.1" />
     <PackageReference Include="System.Memory" Version="4.5.4" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('net5')) ">
-    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('net6')) ">
@@ -155,10 +151,10 @@
     <Compile Include="Cryptography\SQLServerCertificateDatabase.cs" />
     <Compile Include="Cryptography\SubjectIdentifierType.cs" />
     <Compile Include="Cryptography\TemporarySecureMimeContext.cs" />
-    <Compile Include="Cryptography\WindowsSecureMimeContext.cs" Condition="!$(TargetFramework.StartsWith('netstandard1.'))" />
-    <Compile Include="Cryptography\WindowsSecureMimeDigitalCertificate.cs" Condition="!$(TargetFramework.StartsWith('netstandard1.'))" />
-    <Compile Include="Cryptography\WindowsSecureMimeDigitalSignature.cs" Condition="!$(TargetFramework.StartsWith('netstandard1.'))" />
-    <Compile Include="Cryptography\X509Certificate2Extensions.cs" Condition="!$(TargetFramework.StartsWith('netstandard1.'))" />
+    <Compile Include="Cryptography\WindowsSecureMimeContext.cs" />
+    <Compile Include="Cryptography\WindowsSecureMimeDigitalCertificate.cs" />
+    <Compile Include="Cryptography\WindowsSecureMimeDigitalSignature.cs" />
+    <Compile Include="Cryptography\X509Certificate2Extensions.cs" />
     <Compile Include="Cryptography\X509CertificateChain.cs" />
     <Compile Include="Cryptography\X509CertificateDatabase.cs" />
     <Compile Include="Cryptography\X509CertificateRecord.cs" />

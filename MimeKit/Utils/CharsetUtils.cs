@@ -41,7 +41,6 @@ namespace MimeKit.Utils {
 		{
 			int gb2312;
 
-#if NET461_OR_GREATER || NETSTANDARD || NET5_0_OR_GREATER
 			// Note: The CodePagesEncodingProvider was introduced in .NET Framework v4.6.1
 			try {
 				// System.Text.Encoding.RegisterProvider (System.Text.CodePagesEncodingProvider.Instance);
@@ -53,7 +52,6 @@ namespace MimeKit.Utils {
 				Encoding.RegisterProvider (instance);
 			} catch {
 			}
-#endif
 
 			try {
 				Latin1 = Encoding.GetEncoding (28591, new EncoderExceptionFallback (), new DecoderExceptionFallback ());

@@ -257,7 +257,7 @@ namespace MimeKit.Cryptography {
 
 		public byte[] GenerateSignature ()
 		{
-			hash.TransformFinalBlock (new byte[0], 0, 0);
+			hash.TransformFinalBlock (Array.Empty<byte> (), 0, 0);
 
 			return rsa.SignHash (hash.Hash, oid);
 		}
@@ -279,7 +279,7 @@ namespace MimeKit.Cryptography {
 
 		public bool VerifySignature (byte[] signature)
 		{
-			hash.TransformFinalBlock (new byte[0], 0, 0);
+			hash.TransformFinalBlock (Array.Empty<byte> (), 0, 0);
 
 			return rsa.VerifyHash (hash.Hash, oid, signature);
 		}

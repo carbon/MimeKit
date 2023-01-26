@@ -299,11 +299,7 @@ namespace MimeKit.Cryptography {
 					value = DateUtils.UnixEpoch;
 
 				if (columns[i].ColumnName == "PRIVATEKEY" && value is DBNull) {
-#if NET46_OR_GREATER || NET5_0_OR_GREATER || NETSTANDARD
 					value = Array.Empty<byte> ();
-#else
-					value = new byte[0];
-#endif
 				}
 
 				var variable = "@" + columns[i];

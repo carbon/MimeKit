@@ -775,13 +775,8 @@ namespace MimeKit.Cryptography {
 
 			var info = type;
 
-#if NET46_OR_GREATER || NET5_0_OR_GREATER || NETSTANDARD
 			var ctor = type.GetConstructor (Array.Empty<Type> ());
 			var args = Array.Empty<object> ();
-#else
-			var ctor = type.GetConstructor (new Type[0]);
-			var args = new object[0];
-#endif
 
 			if (ctor == null)
 				throw new ArgumentException ("The specified type must have a parameterless constructor.", nameof (type));
