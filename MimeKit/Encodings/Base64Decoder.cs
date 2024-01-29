@@ -37,7 +37,7 @@ namespace MimeKit.Encodings {
 	/// </remarks>
 	public class Base64Decoder : IMimeDecoder
 	{
-		static readonly byte[] base64_rank = new byte[256] {
+		static ReadOnlySpan<byte> base64_rank => [
 			255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
 			255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
 			255,255,255,255,255,255,255,255,255,255,255, 62,255,255,255, 63,
@@ -54,7 +54,7 @@ namespace MimeKit.Encodings {
 			255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
 			255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
 			255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
-		};
+		];
 
 		int previous;
 		uint saved;
@@ -79,12 +79,11 @@ namespace MimeKit.Encodings {
 		/// <returns>A new <see cref="Base64Decoder"/> with identical state.</returns>
 		public IMimeDecoder Clone ()
 		{
-			var decoder = new Base64Decoder ();
-			decoder.previous = previous;
-			decoder.saved = saved;
-			decoder.bytes = bytes;
-
-			return decoder;
+			return new Base64Decoder {
+				previous = previous,
+				saved = saved,
+				bytes = bytes
+			};
 		}
 
 		/// <summary>
